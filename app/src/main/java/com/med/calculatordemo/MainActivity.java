@@ -65,28 +65,48 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
+
     public void calculation(String mainText){
 
         StringTokenizer st = new StringTokenizer(mainText, "[+-*/]");
-        String firstValue = st.nextToken();
-        String secondValue = st.nextToken();
+//        String firstValue = st.nextToken();
+//        String secondValue = st.nextToken();
 
-        double nFirst = Double.parseDouble(firstValue);
-        double nSecond = Double.parseDouble(secondValue);
 
-        if(operator.equalsIgnoreCase("+")){
-             ans = nFirst + nSecond;
-            tvMain.setText(ans+"");
-        }else if(operator.equalsIgnoreCase("-")){
-            ans = nFirst - nSecond;
-            tvMain.setText(ans+"");
-        }else if(operator.equalsIgnoreCase("*")){
-            ans = nFirst * nSecond;
-            tvMain.setText(ans+"");
-        }else if(operator.equalsIgnoreCase("/")){
-            ans = nFirst / nSecond;
-            tvMain.setText(ans+"");
+        while(st.hasMoreTokens()){
+            String token = st.nextToken();
+            double dToken = Double.parseDouble(token);
+            ans = ans + dToken;
         }
+
+        tvMain.setText(ans+"");
+
+
+//        String data = mainText;
+//        String[] items = data.split()
+//        for (String item : items)
+//        {
+//            System.out.println("item = " + item);
+//        }
+
+//        double nFirst = Double.parseDouble(firstValue);
+//        double nSecond = Double.parseDouble(secondValue);
+//
+//        if(operator.equalsIgnoreCase("+")){
+//             ans = nFirst + nSecond;
+//            tvMain.setText(ans+"");
+//        }else if(operator.equalsIgnoreCase("-")){
+//            ans = nFirst - nSecond;
+//            tvMain.setText(ans+"");
+//        }else if(operator.equalsIgnoreCase("*")){
+//            ans = nFirst * nSecond;
+//            tvMain.setText(ans+"");
+//        }else if(operator.equalsIgnoreCase("/")){
+//            ans = nFirst / nSecond;
+//            tvMain.setText(ans+"");
+//        }
     }
 
 
@@ -144,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btnClear:
                 tvMain.setText("");
+                ans = 0;
                 break;
             case R.id.btnDivide:
                 tvMain.append("/");
