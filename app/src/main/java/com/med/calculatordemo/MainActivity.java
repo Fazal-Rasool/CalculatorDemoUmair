@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.StringTokenizer;
 
 import butterknife.BindView;
@@ -51,8 +53,9 @@ public class MainActivity extends AppCompatActivity {
     Button btnDivide;
 
     String mainText="";
-    String operator = "";
     double ans = 0;
+
+    ArrayList<String> listOperator = new ArrayList<>();
 
 
 
@@ -62,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+
+        listOperator.add("+");
 
     }
 
@@ -74,11 +79,20 @@ public class MainActivity extends AppCompatActivity {
 //        String firstValue = st.nextToken();
 //        String secondValue = st.nextToken();
 
+        Iterator<String> itr = listOperator.iterator();
 
         while(st.hasMoreTokens()){
+            String currentOperator = itr.next();
             String token = st.nextToken();
             double dToken = Double.parseDouble(token);
-            ans = ans + dToken;
+            if (currentOperator.equalsIgnoreCase("+"))
+                ans = ans + dToken;
+            else if (currentOperator.equalsIgnoreCase("-"))
+                ans = ans - dToken;
+            else if (currentOperator.equalsIgnoreCase("*"))
+                ans = ans * dToken;
+            else if (currentOperator.equalsIgnoreCase("/"))
+                ans = ans / dToken;
         }
 
         tvMain.setText(ans+"");
@@ -127,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btnPlus:
                 tvMain.append("+");
-                operator = "+";
+                listOperator.add("+");
                 break;
             case R.id.btnFour:
                 tvMain.append("4");
@@ -140,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btnMinus:
                 tvMain.append("-");
-                operator = "-";
+                listOperator.add("-");
                 break;
             case R.id.btnSeven:
                 tvMain.append("7");
@@ -153,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btnMulti:
                 tvMain.append("*");
-                operator = "*";
+                listOperator.add("*");
                 break;
             case R.id.btnEqual:
                 mainText = tvMain.getText().toString();
@@ -165,13 +179,16 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btnClear:
                 tvMain.setText("");
                 ans = 0;
+                listOperator.clear();
+                listOperator.add("+");
                 break;
             case R.id.btnDivide:
                 tvMain.append("/");
-                operator = "/";
+                listOperator.add("/");
                 break;
         }
     }
+
 
 
 }
