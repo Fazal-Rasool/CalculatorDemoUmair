@@ -9,10 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.med.db.Preferences;
+import com.med.models.Model;
+
 public class FirstActivity extends AppCompatActivity {
 
     Button btnGo, btnImplicit;
     EditText etName, etPhone, etAdd;
+    Preferences preferences;
 
 
     @Override
@@ -21,6 +25,7 @@ public class FirstActivity extends AppCompatActivity {
         setContentView(R.layout.activity_first);
 
 
+        createObjects();
         setViews();
         setListeners();
 
@@ -28,8 +33,14 @@ public class FirstActivity extends AppCompatActivity {
 
 
 
+
     }
 
+
+    public void createObjects(){
+
+        preferences = new Preferences(this);
+    }
 
     public void setViews() {
 
@@ -54,6 +65,10 @@ public class FirstActivity extends AppCompatActivity {
                 String name = etName.getText().toString();
                 String phone = etPhone.getText().toString();
                 String address = etAdd.getText().toString();
+
+
+                preferences.setTitle(name);
+
 
                 Model model = new Model();
 

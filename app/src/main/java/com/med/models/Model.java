@@ -1,4 +1,4 @@
-package com.med.calculatordemo;
+package com.med.models;
 
 import java.io.Serializable;
 

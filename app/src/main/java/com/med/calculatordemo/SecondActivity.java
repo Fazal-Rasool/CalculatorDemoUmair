@@ -5,9 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.med.db.Preferences;
+import com.med.models.Model;
+
 public class SecondActivity extends AppCompatActivity {
 
     TextView tvName, tvAdd, tvPhone;
+
+    Preferences preferences;
 
 
     @Override
@@ -15,6 +20,11 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sec);
 
+
+        preferences = new Preferences(this);
+        String value = preferences.getTitle();
+
+        setTitle(value);
 
         setViews();
         getData();
